@@ -45,11 +45,9 @@ function mostrarSeccion(seccion) {
   mainButtons.classList.add("hidden");
   seccion.classList.remove("hidden");
 
-  // Cambiar título principal según la sección
+  // Cambiar título principal solo si es la de Sí/No
   if (seccion === siNoSection) {
     mainTitle.textContent = "🧠 Dejá de pensar";
-  } else {
-    mainTitle.textContent = "🎉 ¡Feliz cumpleaños! 🎉";
   }
 }
 
