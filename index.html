@@ -13,21 +13,22 @@
     <!-- Menú principal -->
     <div id="main-buttons" class="buttons">
       <button id="btn-si-no" class="btn">Tomar decisiones</button>
-      <button id="btn-generador" class="btn">Generador de decisiones</button>
+      <button id="btn-generador" class="btn">Simulador de decisiones importantes</button>
     </div>
 
     <!-- Sección Sí/No -->
     <section id="si-no-section" class="hidden">
-      <p class="subtitulo">🧠 Dejá de pensar</p>
-      <p class="indicacion">Apretá y listo:</p>
-      <button id="decidir-btn" class="btn">¿Qué dice el destino?</button>
-      <p id="resultado"></p>
+      <div class="tarjeta">
+        <h2>🧠 Dejá de pensar</h2>
+        <button id="decidir-btn" class="btn">Apretá y listo</button>
+        <p id="resultado"></p>
+      </div>
       <button class="volver btn-sec">Volver</button>
     </section>
 
     <!-- Sección generador -->
     <section id="generador-section" class="hidden">
-      <div id="tarjeta-container"></div>
+      <div class="tarjeta" id="tarjeta-container"></div>
       <button class="volver btn-sec">Volver</button>
     </section>
   </main>
