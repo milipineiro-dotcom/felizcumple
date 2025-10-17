@@ -1,86 +1,138 @@
+/* --- General --- */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #E0F2D9;
-  color: #265773;
+  background: linear-gradient(135deg, #ffb6c1, #ffe4b5);
+  margin: 0;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
 }
 
-.container {
-  text-align: center;
-  background-color: #A3C9E0;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+main {
+  background: white;
+  border-radius: 2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   width: 90%;
-  max-width: 500px;
+  max-width: 400px;
+  padding: 2rem;
+  text-align: center;
 }
 
 h1 {
-  font-weight: 700;
+  font-size: 1.6rem;
   margin-bottom: 1.5rem;
-}
-
-h2 {
-  font-weight: 700;
-}
-
-.btn {
-  background-color: #88D790;
-  color: #265773;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  margin: 0.5rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-  transition: background-color 0.3s;
-}
-
-.btn:hover {
-  background-color: #72c37b;
 }
 
 .hidden {
   display: none;
 }
 
-#resultado {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 1rem;
+/* --- Botones --- */
+.btn, .btn-sec {
+  display: block;
+  width: 100%;
+  margin: 0.6rem 0;
+  padding: 0.9rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.tarjeta {
-  background-color: #E0F2D9;
-  border-radius: 12px;
-  padding: 1rem;
+.btn {
+  background: #ff69b4;
+  color: white;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: #ff85c1;
+}
+
+.btn-sec {
+  background: #f3f3f3;
+  color: #333;
+}
+
+.btn-sec:hover {
+  background: #e0e0e0;
+}
+
+/* --- Texto e indicaciones --- */
+.subtitulo {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.indicacion {
+  font-size: 0.95rem;
+  color: #555;
   margin-bottom: 1rem;
 }
 
+/* --- Resultado --- */
+#resultado {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #444;
+  margin-top: 1rem;
+}
+
+/* --- Tarjetas --- */
+.tarjeta {
+  background: #fff0f5;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
 .opciones button {
-  display: block;
-  width: 100%;
-  background-color: #88D790;
-  color: #265773;
+  background: #ffe4e1;
   border: none;
-  padding: 0.8rem;
-  margin: 0.4rem 0;
-  border-radius: 8px;
+  border-radius: 1rem;
+  padding: 0.6rem 1rem;
+  margin: 0.3rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  font-weight: 700;
-  transition: background-color 0.3s;
+  transition: background 0.25s;
 }
 
 .opciones button:hover {
-  background-color: #72c37b;
+  background: #ffb6c1;
 }
 
-.volver {
-  background-color: #265773;
-  color: #E0F2D9;
-  font-weight: 700;
+/* --- Responsive --- */
+@media (max-width: 500px) {
+  main {
+    width: 95%;
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .btn, .btn-sec {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+
+  .tarjeta p {
+    font-size: 0.95rem;
+  }
 }
