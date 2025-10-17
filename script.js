@@ -36,6 +36,7 @@ const decisiones = [
   }
 ];
 
+
 let indiceActual = 0;
 
 // --- Mostrar secciones ---
