@@ -8,6 +8,7 @@ const decidirBtn = document.getElementById("decidir-btn");
 const resultado = document.getElementById("resultado");
 const tarjetaContainer = document.getElementById("tarjeta-container");
 const botonesVolver = document.querySelectorAll(".volver");
+const mainTitle = document.getElementById("main-title");
 
 // --- Datos del generador
 const decisiones = [
@@ -43,12 +44,20 @@ let indiceActual = 0;
 function mostrarSeccion(seccion) {
   mainButtons.classList.add("hidden");
   seccion.classList.remove("hidden");
+
+  // Cambiar título principal según la sección
+  if (seccion === siNoSection) {
+    mainTitle.textContent = "🧠 Dejá de pensar";
+  } else {
+    mainTitle.textContent = "🎉 ¡Feliz cumpleaños! 🎉";
+  }
 }
 
 function volverInicio() {
   siNoSection.classList.add("hidden");
   generadorSection.classList.add("hidden");
   mainButtons.classList.remove("hidden");
+  mainTitle.textContent = "🎉 ¡Feliz cumpleaños! 🎉";
   resultado.textContent = "";
   tarjetaContainer.innerHTML = "";
   indiceActual = 0;
