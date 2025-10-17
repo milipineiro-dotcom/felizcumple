@@ -42,7 +42,7 @@ let indiceActual = 0;
 function mostrarSeccion(seccion) {
   mainButtons.classList.add("hidden");
   seccion.classList.remove("hidden");
-  if (seccion === siNoSection) mainTitle.textContent = "🧠 Dejá de pensar";
+  if (seccion === siNoSection) mainTitle.textContent = "";
 }
 
 function volverInicio() {
@@ -69,11 +69,12 @@ decidirBtn.onclick = () => {
   setTimeout(() => (resultado.style.opacity = 1), 50);
 };
 
-// --- Generador de decisiones ---
+// --- Simulador ---
 function mostrarTarjeta() {
   const decision = decisiones[indiceActual];
   tarjetaContainer.innerHTML = `
     <div class="tarjeta fade">
+      <h2>🎯 Simulador de decisiones importantes</h2>
       <p>${decision.texto}</p>
       <div class="opciones">
         ${decision.opciones.map(op => `<button>${op}</button>`).join("")}
@@ -89,11 +90,16 @@ function mostrarBotonGenerarOtra() {
   const boton = document.createElement("button");
   boton.textContent = "Generar otra";
   boton.classList.add("btn");
+  boton.style.margin = "1rem auto";
   boton.onclick = () => {
     indiceActual++;
     indiceActual < decisiones.length
       ? mostrarTarjeta()
-      : (tarjetaContainer.innerHTML = "<p>🎉 ¡No hay más decisiones por hoy! 🎉</p>");
+      : (tarjetaContainer.innerHTML = `
+          <div class="tarjeta">
+            <p>🎉 ¡No hay más decisiones por hoy! 🎉</p>
+          </div>
+        `);
   };
   tarjetaContainer.appendChild(boton);
 }
