@@ -27,7 +27,7 @@ const decisiones = [
     ]
   },
   {
-    texto: "Tus alumnos de 1° te ofrecen un sanguche de milanesa y evidentemente está envenenado.",
+    texto: "Tus alumnos de 1° de Bio te ofrecen un sanguche de milanesa y evidentemente está envenenado.",
     opciones: [
       "Lo como igual.",
       "Lo como mientras escribo mi carta de despedida.",
