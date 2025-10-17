@@ -1,16 +1,14 @@
-// --- Selección de elementos
-const btnSiNo = document.getElementById("btn-si-no");
-const btnGenerador = document.getElementById("btn-generador");
+const mainTitle = document.getElementById("main-title");
+const mainButtons = document.getElementById("main-buttons");
 const siNoSection = document.getElementById("si-no-section");
 const generadorSection = document.getElementById("generador-section");
-const mainButtons = document.getElementById("main-buttons");
 const decidirBtn = document.getElementById("decidir-btn");
 const resultado = document.getElementById("resultado");
 const tarjetaContainer = document.getElementById("tarjeta-container");
 const botonesVolver = document.querySelectorAll(".volver");
-const mainTitle = document.getElementById("main-title");
+const btnSiNo = document.getElementById("btn-si-no");
+const btnGenerador = document.getElementById("btn-generador");
 
-// --- Datos del generador
 const decisiones = [
   {
     texto: "Estás por salir, hace calor pero a la noche refresca. Sin embargo, nunca le pegan al pronóstico, así que corres el riesgo de llevar abrigo al pedo.",
@@ -29,7 +27,7 @@ const decisiones = [
     ]
   },
   {
-    texto: "Tus alumnos de 1° de Biología te ofrecen un sanguche de milanesa y evidentemente está envenenado.",
+    texto: "Tus alumnos de 1° te ofrecen un sanguche de milanesa y evidentemente está envenenado.",
     opciones: [
       "Lo como igual.",
       "Lo como mientras escribo mi carta de despedida.",
@@ -40,20 +38,15 @@ const decisiones = [
 
 let indiceActual = 0;
 
-// --- Función para mostrar secciones
+// --- Mostrar secciones ---
 function mostrarSeccion(seccion) {
   mainButtons.classList.add("hidden");
   seccion.classList.remove("hidden");
-
-  // Cambiar título principal solo si es la de Sí/No
-  if (seccion === siNoSection) {
-    mainTitle.textContent = "🧠 Dejá de pensar";
-  }
+  if (seccion === siNoSection) mainTitle.textContent = "🧠 Dejá de pensar";
 }
 
 function volverInicio() {
-  siNoSection.classList.add("hidden");
-  generadorSection.classList.add("hidden");
+  [siNoSection, generadorSection].forEach(sec => sec.classList.add("hidden"));
   mainButtons.classList.remove("hidden");
   mainTitle.textContent = "🎉 ¡Feliz cumpleaños! 🎉";
   resultado.textContent = "";
@@ -61,35 +54,34 @@ function volverInicio() {
   indiceActual = 0;
 }
 
-// --- Botones principales
-btnSiNo.addEventListener("click", () => mostrarSeccion(siNoSection));
-btnGenerador.addEventListener("click", () => mostrarSeccion(generadorSection));
-botonesVolver.forEach(btn => btn.addEventListener("click", volverInicio));
+// --- Botones principales ---
+btnSiNo.onclick = () => mostrarSeccion(siNoSection);
+btnGenerador.onclick = () => {
+  mostrarSeccion(generadorSection);
+  mostrarTarjeta();
+};
+botonesVolver.forEach(btn => (btn.onclick = volverInicio));
 
-// --- Tomar decisiones (Sí/No)
-decidirBtn.addEventListener("click", () => {
-  const opciones = ["Sí", "No"];
-  const eleccion = opciones[Math.floor(Math.random() * opciones.length)];
-  resultado.textContent = eleccion;
-});
+// --- Sí / No ---
+decidirBtn.onclick = () => {
+  resultado.textContent = Math.random() < 0.5 ? "Sí" : "No";
+  resultado.style.opacity = 0;
+  setTimeout(() => (resultado.style.opacity = 1), 50);
+};
 
-// --- Generador de decisiones
+// --- Generador de decisiones ---
 function mostrarTarjeta() {
   const decision = decisiones[indiceActual];
   tarjetaContainer.innerHTML = `
-    <div class="tarjeta">
+    <div class="tarjeta fade">
       <p>${decision.texto}</p>
       <div class="opciones">
-        ${decision.opciones.map((op, i) => `<button data-op="${i}">${op}</button>`).join("")}
+        ${decision.opciones.map(op => `<button>${op}</button>`).join("")}
       </div>
     </div>
   `;
-
-  const botonesOpciones = tarjetaContainer.querySelectorAll(".opciones button");
-  botonesOpciones.forEach(btn => {
-    btn.addEventListener("click", () => {
-      mostrarBotonGenerarOtra();
-    });
+  tarjetaContainer.querySelectorAll(".opciones button").forEach(btn => {
+    btn.onclick = mostrarBotonGenerarOtra;
   });
 }
 
@@ -97,16 +89,11 @@ function mostrarBotonGenerarOtra() {
   const boton = document.createElement("button");
   boton.textContent = "Generar otra";
   boton.classList.add("btn");
-  boton.addEventListener("click", () => {
+  boton.onclick = () => {
     indiceActual++;
-    if (indiceActual < decisiones.length) {
-      mostrarTarjeta();
-    } else {
-      tarjetaContainer.innerHTML = "<p>🎉 ¡No hay más decisiones por hoy! 🎉</p>";
-    }
-  });
+    indiceActual < decisiones.length
+      ? mostrarTarjeta()
+      : (tarjetaContainer.innerHTML = "<p>🎉 ¡No hay más decisiones por hoy! 🎉</p>");
+  };
   tarjetaContainer.appendChild(boton);
 }
-
-// Mostrar primera tarjeta automáticamente
-mostrarTarjeta();
