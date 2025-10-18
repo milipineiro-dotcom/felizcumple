@@ -1,38 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tomá una decisión 🎲</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main>
-    <h1 id="main-title">🎉 ¡Feliz cumpleaños! 🎉</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tomador de decisiones serias</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  </head>
 
-    <!-- Menú principal -->
-    <div id="main-buttons" class="buttons">
-      <button id="btn-si-no" class="btn">Tomar decisiones</button>
-      <button id="btn-generador" class="btn">Clic acá si no te convenció</button>
+  <body>
+    <div class="container">
+      <h1>¡Feliz cumpleaños!</h1>
+
+      <div class="buttons">
+        <button id="decisionBtn">Tomar decisiones</button>
+        <button id="notConvincedBtn">Clic acá si no te convenció</button>
+      </div>
+
+      <div id="card" class="card hidden">
+        <h2 id="cardTitle"></h2>
+        <p id="cardText"></p>
+        <button id="cardButton"></button>
+        <button id="backBtn" class="hidden">Volver</button>
+      </div>
     </div>
 
-    <!-- Sección Sí/No -->
-    <section id="si-no-section" class="hidden">
-      <div class="tarjeta">
-        <h2>Tomá una decisión</h2>
-        <button id="decidir-btn" class="btn">Apretá y listo</button>
-        <p id="resultado"></p>
-      </div>
-      <button class="volver btn-sec">Volver</button>
-    </section>
-
-    <!-- Sección generador -->
-    <section id="generador-section" class="hidden">
-      <div class="tarjeta" id="tarjeta-container"></div>
-      <button class="volver btn-sec">Volver</button>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
