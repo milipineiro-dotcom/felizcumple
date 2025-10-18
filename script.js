@@ -1,106 +1,51 @@
-const mainTitle = document.getElementById("main-title");
-const mainButtons = document.getElementById("main-buttons");
-const siNoSection = document.getElementById("si-no-section");
-const generadorSection = document.getElementById("generador-section");
-const decidirBtn = document.getElementById("decidir-btn");
-const resultado = document.getElementById("resultado");
-const tarjetaContainer = document.getElementById("tarjeta-container");
-const botonesVolver = document.querySelectorAll(".volver");
-const btnSiNo = document.getElementById("btn-si-no");
-const btnGenerador = document.getElementById("btn-generador");
+const decisionBtn = document.getElementById("decisionBtn");
+const notConvincedBtn = document.getElementById("notConvincedBtn");
+const card = document.getElementById("card");
+const cardTitle = document.getElementById("cardTitle");
+const cardText = document.getElementById("cardText");
+const cardButton = document.getElementById("cardButton");
+const backBtn = document.getElementById("backBtn");
 
-const decisiones = [
-  {
-    texto: "Estás por salir, hace calor pero a la noche refresca. Sin embargo, nunca le pegan al pronóstico, así que corres el riesgo de llevar abrigo al pedo.",
-    opciones: [
-      "No llevo, hace calor (spoiler: espero el tren cagado de frío)",
-      "Lo llevo por las dudas (después digo '¿Para qué traje abrigo?')",
-      "Le pregunto a Mili"
-    ]
-  },
-  {
-    texto: "¿Voy a correr al poli?",
-    opciones: [
-      "Sí, cuando llego me pregunto por qué.",
-      "No, pero me felicito por la intención.",
-      "Le pregunto a Mili"
-    ]
-  },
-  {
-    texto: "Tus alumnos de 1° de Bio te ofrecen un sanguche de milanesa y evidentemente está envenenado.",
-    opciones: [
-      "Lo como igual.",
-      "Lo como mientras escribo mi carta de despedida.",
-      "Le pregunto a Mili"
-    ]
-  }
+const phrases = [
+  "Dormí una siesta, capaz se resuelve solo",
+  "Esperá a que se solucione mágicamente",
+  "Consultale al Luqui del futuro (no contesta)",
+  "Probá apagarte y volver a prender",
+  "Comé algo, nunca falla",
+  "Si te da paja no lo hagas"
 ];
 
+// --- BOTÓN 1: Tomar decisiones ---
+decisionBtn.addEventListener("click", () => {
+  card.classList.remove("hidden");
+  cardTitle.textContent = "Dejá de pensar";
+  cardText.textContent = "";
+  cardButton.textContent = "Apretá y listo";
+  cardButton.classList.remove("hidden");
+  backBtn.classList.remove("hidden");
 
-let indiceActual = 0;
-
-// --- Mostrar secciones ---
-function mostrarSeccion(seccion) {
-  mainButtons.classList.add("hidden");
-  seccion.classList.remove("hidden");
-  if (seccion === siNoSection) mainTitle.textContent = "";
-}
-
-function volverInicio() {
-  [siNoSection, generadorSection].forEach(sec => sec.classList.add("hidden"));
-  mainButtons.classList.remove("hidden");
-  mainTitle.textContent = "🎉 ¡Feliz cumpleaños! 🎉";
-  resultado.textContent = "";
-  tarjetaContainer.innerHTML = "";
-  indiceActual = 0;
-}
-
-// --- Botones principales ---
-btnSiNo.onclick = () => mostrarSeccion(siNoSection);
-btnGenerador.onclick = () => {
-  mostrarSeccion(generadorSection);
-  mostrarTarjeta();
-};
-botonesVolver.forEach(btn => (btn.onclick = volverInicio));
-
-// --- Sí / No ---
-decidirBtn.onclick = () => {
-  resultado.textContent = Math.random() < 0.5 ? "Sí" : "No";
-  resultado.style.opacity = 0;
-  setTimeout(() => (resultado.style.opacity = 1), 50);
-};
-
-// --- Simulador ---
-function mostrarTarjeta() {
-  const decision = decisiones[indiceActual];
-  tarjetaContainer.innerHTML = `
-    <div class="tarjeta fade">
-      <h2>🎯 Simulador de decisiones importantes</h2>
-      <p>${decision.texto}</p>
-      <div class="opciones">
-        ${decision.opciones.map(op => `<button>${op}</button>`).join("")}
-      </div>
-    </div>
-  `;
-  tarjetaContainer.querySelectorAll(".opciones button").forEach(btn => {
-    btn.onclick = mostrarBotonGenerarOtra;
-  });
-}
-
-function mostrarBotonGenerarOtra() {
-  const boton = document.createElement("button");
-  boton.textContent = "Generar otra";
-  boton.classList.add("btn");
-  boton.style.margin = "1rem auto";
-  boton.onclick = () => {
-    indiceActual++;
-    indiceActual < decisiones.length
-      ? mostrarTarjeta()
-      : (tarjetaContainer.innerHTML = `
-          <div class="tarjeta">
-            <p>🎉 ¡No hay más decisiones por hoy! 🎉</p>
-          </div>
-        `);
+  cardButton.onclick = () => {
+    const result = Math.random() < 0.5 ? "Sí ✅" : "No ❌";
+    cardTitle.textContent = result;
+    cardButton.classList.add("hidden");
   };
-  tarjetaContainer.appendChild(boton);
-}
+});
+
+// --- BOTÓN 2: Clic acá si no te convenció ---
+notConvincedBtn.addEventListener("click", () => {
+  card.classList.remove("hidden");
+  cardButton.classList.add("hidden");
+  backBtn.classList.remove("hidden");
+  cardTitle.textContent = "Consejos inútiles";
+
+  const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+  cardText.textContent = randomPhrase;
+});
+
+// --- BOTÓN VOLVER ---
+backBtn.addEventListener("click", () => {
+  card.classList.add("hidden");
+  cardButton.classList.remove("hidden");
+  cardTitle.textContent = "";
+  cardText.textContent = "";
+});
